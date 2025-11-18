@@ -3,32 +3,28 @@ using namespace std;
 
 int main()
 {
+    unordered_map<int, int> hp; // number, freq
     int n;
     cin >> n;
-    multiset<int> ms;
-    set<int> s;
-    int cuenta = 0;
+    int count = 0;
 
     for (int i = 0; i < n; i++)
     {
         int temp;
         cin >> temp;
-        ms.insert(temp);
-        s.insert(temp);
+        hp[temp]++;
     }
 
-    for (int number : s)
+    for (auto pair : hp)
     {
-        int c = ms.count(number);
-
-        if (c == number)
+        if (pair.first == pair.second)
             continue;
 
-        if (c < number)
-            cuenta += c;
+        if (pair.first > pair.second)
+            count += pair.second;
         else
-            cuenta += (c - number);
+            count += (pair.second - pair.first);
     }
 
-    cout << cuenta << endl;
+    cout << count << endl;
 }
